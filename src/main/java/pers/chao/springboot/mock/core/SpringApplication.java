@@ -1,5 +1,6 @@
 package pers.chao.springboot.mock.core;
 
+import lombok.extern.slf4j.Slf4j;
 import pers.chao.springboot.mock.annotation.SpringBootApplication;
 import pers.chao.springboot.mock.config.ApplicationConfiguration;
 import pers.chao.springboot.mock.tomcat.TomcatStarter;
@@ -12,6 +13,7 @@ import java.io.File;
  * @author WangYichao
  * @date 2019/4/27 12:37
  */
+@Slf4j
 public class SpringApplication {
 
     public static ApplicationContext run(Class<?> targetClass, String... args) {
@@ -34,9 +36,10 @@ public class SpringApplication {
 
             //启动tomcat 构建dispatcherServlet
             TomcatStarter tomcatStarter = new TomcatStarter();
+
             tomcatStarter.start();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Springboot 应用启动失败",e);
         }
         return applicationContext;
     }
